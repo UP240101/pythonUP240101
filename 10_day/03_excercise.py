@@ -1,5 +1,4 @@
 import data
-data.path.append('data')
 from data import countries
 from data import countries_data
 # 1
@@ -14,7 +13,6 @@ for i in range(3, -1, -1):
     rev.append(fruity_list[i])
 print(rev)
 # 3
-# noinspection DuplicatedCode
 list_data = countries_data.data
 total_languages_initial = []
 for i in list_data:
