@@ -1,11 +1,8 @@
-import data
-from data import countries
-from data import countries_data
+from countries import countries
+from countries_data import countries_data
 # 1
-list_c = countries.country_list
-for country in list_c:
-    if "land" in country:
-        print(country)
+land_countries = [country for country in countries if "land" in country.lower()]
+print(land_countries)
 # 2
 fruity_list = ['banana', 'orange', 'mango', 'lemon']
 rev = []
@@ -13,22 +10,20 @@ for i in range(3, -1, -1):
     rev.append(fruity_list[i])
 print(rev)
 # 3
-list_data = countries_data.data
-total_languages_initial = []
-for i in list_data:
-    total_languages_initial.extend(i["languages"])
-print("Languages = ", len(set(total_languages_initial)))
-counts = {}
-for i in total_languages_initial:
-    counts[i] = counts.get(i, 0) + 1
-def sort_dict_by_value(d, reverse=False):
-    return dict(sorted(d.items(), key=lambda x: x[1], reverse=reverse))
-counts = sort_dict_by_value(counts, True)
-for i in list(counts.items())[:10]:
-    print(i)
-populations = {}
-for i in list_data:
-    populations[i["name"]] = i["population"]
-populations = sort_dict_by_value(populations, True)
-for i in list(populations.items())[:10]:
-    print(i)
+languages = set()
+for country in countries_data:
+    languages.update(country["languages"])  
+total_languages = len(languages)
+print(total_languages)
+# Contar la frecuencia de cada idioma
+language_counts = {}
+for country in countries_data:
+    for language in country["languages"]:
+        language_counts[language] = language_counts.get(language, 0) + country["population"]
+print(language_counts)
+# Ordenar los idiomas por número de hablantes y obtener los 10 más hablados
+most_spoken_languages = sorted(language_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+print(most_spoken_languages)
+# Ordenar los países por población y obtener los 10 más poblados
+most_populated_countries = sorted(countries_data, key=lambda x: x["population"], reverse=True)[:10]
+print(most_populated_countries)

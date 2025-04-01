@@ -1,3 +1,4 @@
+import random
 #1
 def shuffle_list(lista):
     random.shuffle(lista)
